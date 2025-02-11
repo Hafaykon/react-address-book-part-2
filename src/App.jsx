@@ -16,17 +16,24 @@ function App() {
                 const response = await fetch(baseURL)
                 if(!response.ok) throw new Error("Could not retrive contacts from API")
                 
-                const jsonData = response.json()
+                const jsonData = await response.json()
+
                 setContacts(jsonData)
-            } catch(error) {console.error("Fetch error:", error);}
+            } catch(error) {console.error("Fetch error:", error);}   
         }
         fetchData()
     }, [])
 
     return (
-        <ContactContext.Provider value={ {contacts, setContacts} }>
-            <Dashboard/>
-        </ContactContext.Provider>
+        <>
+            <ContactContext.Provider value={ {contacts, setContacts} }>
+                <Dashboard/>
+            
+                <Routes>
+                    <Route path="/" element={<Dashboard/>} />
+                </Routes>
+            </ContactContext.Provider>
+        </>
     );
 }
 
