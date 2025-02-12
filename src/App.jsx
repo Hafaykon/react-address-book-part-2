@@ -4,6 +4,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import ContactList from './components/ContactList';
 import ContactProfile from './components/ContactProfile';
 import AddForm from './components/AddForm';
+import UpdateForm from './components/UpdateForm';
 
 const baseURL = "https://boolean-uk-api-server.fly.dev/Hafaykon/contact"
 
@@ -44,7 +45,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<ContactList/>} />
                     <Route path="/add" element={<AddForm/>} />
-                    <Route path="view/:id" element={<ContactProfile/>} />
+                    <Route path="/view/:id" element={<ContactProfile/>} />
+                    <Route path="/view/:id/update" element={<UpdateForm/>} />
                 </Routes>
                 </main>
             </ContactContext.Provider>
