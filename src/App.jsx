@@ -1,7 +1,9 @@
 import './App.css';
 import { useState, useEffect, createContext } from 'react';
 import { Link, Route, Routes } from "react-router-dom";
-import Dashboard from './components/Dashboard';
+import ContactList from './components/ContactList';
+import ContactProfile from './components/ContactProfile';
+import AddForm from './components/AddForm';
 
 const baseURL = "https://boolean-uk-api-server.fly.dev/Hafaykon/contact"
 
@@ -26,13 +28,27 @@ function App() {
 
     return (
         <>
-            <ContactContext.Provider value={ {contacts, setContacts} }>
-                <Dashboard/>
             
+            <ContactContext.Provider value={ {contacts, setContacts} }>
+                <Link to="/" className="btn btn-primary ms-4 mt-3 me--6">Home</Link>
+                <main className="container d-flex  justify-content-between p-2" style={{border: "solid grey"}}>
+                    <div className="col ps-5">
+                        <h1 className="ps-4">Menu</h1>
+                        <nav>
+                            <ul>
+                                <li> <Link to="/">Contacts List</Link>  </li>
+                                <li> <Link to="/add">Add New Contact</Link>   </li>
+                            </ul>
+                        </nav> 
+                    </div>                
                 <Routes>
-                    <Route path="/" element={<Dashboard/>} />
+                    <Route path="/" element={<ContactList/>} />
+                    <Route path="/add" element={<AddForm/>} />
+                    <Route path="view/:id" element={<ContactProfile/>} />
                 </Routes>
+                </main>
             </ContactContext.Provider>
+
         </>
     );
 }
